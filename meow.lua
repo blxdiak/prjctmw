@@ -700,7 +700,7 @@ if game.CoreGui:FindFirstChild("woof") then
              )
              spawn(function()
                 TweenService:Create(
-                   game.CoreGui.backiground.BackgroundFrame,
+                   game.CoreGui.background.BackgroundFrame,
                    TweenInfo.new(.3, Enum.EasingStyle.Quad),
                    {BackgroundTransparency = 1}
                 ):Play()
@@ -942,7 +942,6 @@ if game.CoreGui:FindFirstChild("woof") then
              end
          end
      end
-    print("changed")
  end
  
  MainFrameSearchBox.Changed:Connect(UpdateResoults)
