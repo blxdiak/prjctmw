@@ -942,7 +942,6 @@ if game.CoreGui:FindFirstChild("woof") then
              end
          end
      end
-    print("changed")
  end
  
  MainFrameSearchBox.Changed:Connect(UpdateResoults)
