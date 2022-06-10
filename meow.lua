@@ -700,7 +700,7 @@ if game.CoreGui:FindFirstChild("woof") then
              )
              spawn(function()
                 TweenService:Create(
-                   game.CoreGui.background.BackgroundFrame,
+                   game.CoreGui.backiground.BackgroundFrame,
                    TweenInfo.new(.3, Enum.EasingStyle.Quad),
                    {BackgroundTransparency = 1}
                 ):Play()
