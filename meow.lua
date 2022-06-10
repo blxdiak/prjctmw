@@ -740,7 +740,7 @@ if game.CoreGui:FindFirstChild("woof") then
              )
              spawn(function()
                 TweenService:Create(
-                   game.CoreGui.backiground.BackgroundFrame,
+                   game.CoreGui.background.BackgroundFrame,
                    TweenInfo.new(.3, Enum.EasingStyle.Quad),
                    {BackgroundTransparency = 0.6}
                 ):Play()
@@ -1816,7 +1816,7 @@ if game.CoreGui:FindFirstChild("woof") then
     local ToggleDotGradient = Instance.new("UIGradient")
     local ToggleDotCorner = Instance.new("UICorner")
  
-    Toggle.Name = title
+    Toggle.Name = "Toggle"
     Toggle.Parent = Container
     Toggle.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
     Toggle.Position = UDim2.new(-0.747557044, 0, 0.729113936, 0)
@@ -1826,6 +1826,12 @@ if game.CoreGui:FindFirstChild("woof") then
     Toggle.Text = ""
     Toggle.TextColor3 = Color3.fromRGB(255, 255, 255)
     Toggle.TextSize = 14.000
+ 
+    local TextboxStroke = Instance.new("UIStroke")
+    TextboxStroke.Parent = Toggle
+    TextboxStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    TextboxStroke.Color = Color3.fromRGB(65, 65, 65)
+    TextboxStroke.Transparency = 0.6
     
     ToggleCorner.CornerRadius = UDim.new(0, 5)
     ToggleCorner.Name = "ToggleCorner"
@@ -1867,17 +1873,27 @@ if game.CoreGui:FindFirstChild("woof") then
     ToggleDot.Parent = ToggleFrameRainbow
     ToggleDot.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     ToggleDot.Position = UDim2.new(-0.129998758, -3, 0.243545532, -4)
-    --0.129998758, -3, 0.243545532, -4 ^^
     ToggleDot.Size = UDim2.new(0, 22, 0, 20)
-    
  
-    ToggleDotGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 17, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 162, 255))}
+ 
+    
+    ToggleDotGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(13, 45, 226)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+    ToggleDotGradient.Name = "ToggleDotGradient"
+    ToggleDotGradient.Parent = ToggleDot
+    
+    ToggleDotCorner.CornerRadius = UDim.new(1, 0)
+    ToggleDotCorner.Name = "ToggleDotCorner"
+    ToggleDotCorner.Parent = ToggleDot   
+ 
+    ToggleDotGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(13, 45, 226)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
     ToggleDotGradient.Name = "ToggleDotGradient"
     ToggleDotGradient.Parent = ToggleDot
     
     ToggleDotCorner.CornerRadius = UDim.new(1, 0)
     ToggleDotCorner.Name = "ToggleDotCorner"
     ToggleDotCorner.Parent = ToggleDot
+ 
+    
  
     Toggle.MouseEnter:Connect(function()
        TweenService:Create(
@@ -1899,7 +1915,8 @@ if game.CoreGui:FindFirstChild("woof") then
        ToggleDot.Position = UDim2.new(-0.05, -3, 0.243545532, -4)
     else
        ToggleDot.Position = UDim2.new(0.595001221, -3, 0.243545532, -4)
-       pcall(callback, Toggled)
+       
+          pcall(callback, Toggled)
     end
  
     Toggle.MouseButton1Click:Connect(function()
@@ -1917,9 +1934,10 @@ if game.CoreGui:FindFirstChild("woof") then
           ):Play()
        end
        Toggled = not Toggled
-       pcall(callback, Toggled)
+       
+          pcall(callback, Toggled)
     end)
-    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
  end
  
  
