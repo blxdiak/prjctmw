@@ -1873,7 +1873,7 @@ if game.CoreGui:FindFirstChild("woof") then
     ToggleDot.Parent = ToggleFrameRainbow
     ToggleDot.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     ToggleDot.Position = UDim2.new(-0.129998758, -3, 0.243545532, -4)
-    ToggleDot.Size = UDim2.new(0, 22, 0, 20)
+    ToggleDot.Size = UDim2.new(0, 20, 0, 20)
  
  
     
@@ -1885,7 +1885,7 @@ if game.CoreGui:FindFirstChild("woof") then
     ToggleDotCorner.Name = "ToggleDotCorner"
     ToggleDotCorner.Parent = ToggleDot   
  
-    ToggleDotGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(13, 45, 226)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
+    ToggleDotGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 17, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 162, 255))}
     ToggleDotGradient.Name = "ToggleDotGradient"
     ToggleDotGradient.Parent = ToggleDot
     
