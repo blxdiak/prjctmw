@@ -1037,7 +1037,7 @@ if game.CoreGui:FindFirstChild("woof") then
     TabTitle.TextSize = 17.000
     TabTitle.TextXAlignment = Enum.TextXAlignment.Left
     
-    TabGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(236, 136, 36)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 204, 51))}
+    TabGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(13, 45, 226)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
     TabGradient.Name = "TabGradient"
     TabGradient.Parent = Tab
  
@@ -1282,7 +1282,7 @@ if game.CoreGui:FindFirstChild("woof") then
     SliderIndicatorCorner.Name = "SliderIndicatorCorner"
     SliderIndicatorCorner.Parent = SliderIndicator
     
-    SliderIndicatorGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(236, 136, 36)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 204, 51))}
+    SliderIndicatorGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(13, 45, 226)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
     SliderIndicatorGradient.Name = "SliderIndicatorGradient"
     SliderIndicatorGradient.Parent = SliderIndicator
     
@@ -2083,7 +2083,7 @@ if game.CoreGui:FindFirstChild("woof") then
  
  
     
-    ToggleDotGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(236, 136, 36)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 204, 51))}
+    ToggleDotGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(13, 45, 226)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
     ToggleDotGradient.Name = "ToggleDotGradient"
     ToggleDotGradient.Parent = ToggleDot
     
@@ -2091,7 +2091,7 @@ if game.CoreGui:FindFirstChild("woof") then
     ToggleDotCorner.Name = "ToggleDotCorner"
     ToggleDotCorner.Parent = ToggleDot   
  
-    ToggleDotGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(236, 136, 36)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 204, 51))}
+    ToggleDotGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(13, 45, 226)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
     ToggleDotGradient.Name = "ToggleDotGradient"
     ToggleDotGradient.Parent = ToggleDot
     
@@ -2406,7 +2406,7 @@ if game.CoreGui:FindFirstChild("woof") then
        ChecklistItemCheck.Position = UDim2.new(0.898372591, 0, 0.0833333358, 0)
        ChecklistItemCheck.Size = UDim2.new(0, 28, 0, 20)
        ChecklistItemCheck.Image = "rbxassetid://6031068420"
-       ChecklistItemCheck.ImageColor3 = Color3.fromRGB(236, 136, 36)
+       ChecklistItemCheck.ImageColor3 = Color3.fromRGB(13, 45, 226)
  
        ChecklistItem.MouseEnter:Connect(
           function()
@@ -2553,7 +2553,7 @@ if game.CoreGui:FindFirstChild("woof") then
        ChecklistItemCheck.Position = UDim2.new(0.898372591, 0, 0.0833333358, 0)
        ChecklistItemCheck.Size = UDim2.new(0, 28, 0, 20)
        ChecklistItemCheck.Image = "rbxassetid://6031068420"
-       ChecklistItemCheck.ImageColor3 = Color3.fromRGB(236, 136, 36)
+       ChecklistItemCheck.ImageColor3 = Color3.fromRGB(13, 45, 226)
  
        ChecklistItem.MouseEnter:Connect(
           function()
@@ -2856,7 +2856,7 @@ if game.CoreGui:FindFirstChild("woof") then
     RainbowToggleDotCorner.Name = "RainbowToggleDotCorner"
     RainbowToggleDotCorner.Parent = RainbowToggleDot
  
-    RainbowToggleDotGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(236, 136, 36)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 204, 51))}
+    RainbowToggleDotGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(13, 45, 226)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 255))}
     RainbowToggleDotGradient.Name = "RainbowToggleDotGradient"
     RainbowToggleDotGradient.Parent = RainbowToggleDot
  
