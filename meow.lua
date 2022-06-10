@@ -1872,7 +1872,7 @@ if game.CoreGui:FindFirstChild("woof") then
     ToggleDot.Name = "ToggleDot"
     ToggleDot.Parent = ToggleFrameRainbow
     ToggleDot.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    ToggleDot.Position = UDim2.new(-0.129998758, -3, 0.243545540, -4)
+    ToggleDot.Position = UDim2.new(-0.129998758, -3, 0.2435455, -4)
     ToggleDot.Size = UDim2.new(0, 22, 0, 20)
  
  
