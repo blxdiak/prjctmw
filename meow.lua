@@ -706,9 +706,9 @@ if game.CoreGui:FindFirstChild("woof") then
                 ):Play()
              end)
  
-             if game.CoreGui:FindFirstChild("background") then
+             if game.CoreGui:FindFirstChild("backiground") then
                 TweenService:Create(
-                   game.CoreGui.background.BackgroundFrame,
+                   game.CoreGui.backiground.BackgroundFrame,
                    TweenInfo.new(.3, Enum.EasingStyle.Quad),
                    {BackgroundTransparency = 1}
                ):Play()
@@ -740,7 +740,7 @@ if game.CoreGui:FindFirstChild("woof") then
              )
              spawn(function()
                 TweenService:Create(
-                   game.CoreGui.background.BackgroundFrame,
+                   game.CoreGui.backiground.BackgroundFrame,
                    TweenInfo.new(.3, Enum.EasingStyle.Quad),
                    {BackgroundTransparency = 0.6}
                 ):Play()
@@ -755,9 +755,9 @@ if game.CoreGui:FindFirstChild("woof") then
                 0.3,
                 false
              )
-             if game.CoreGui:FindFirstChild("background") then
+             if game.CoreGui:FindFirstChild("backiground") then
                 TweenService:Create(
-                   game.CoreGui.background.BackgroundFrame,
+                   game.CoreGui.backiground.BackgroundFrame,
                    TweenInfo.new(.3, Enum.EasingStyle.Quad),
                    {BackgroundTransparency = 0.6}
                ):Play()
@@ -942,6 +942,7 @@ if game.CoreGui:FindFirstChild("woof") then
              end
          end
      end
+    print("changed")
  end
  
  MainFrameSearchBox.Changed:Connect(UpdateResoults)
