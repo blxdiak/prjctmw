@@ -152,7 +152,7 @@ if game.CoreGui:FindFirstChild("woof") then
     TabHolder.Parent = LeftFrame
     TabHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     TabHolder.BackgroundTransparency = 1.000
-    TabHolder.Position = UDim2.new(0.056721665, 0, 0.113540091, 0)
+    TabHolder.Position = UDim2.new(0.056721665, 0, 0.00472821482, 0)
     TabHolder.Size = UDim2.new(0, 187, 0, 335)
     
     TabHoldLayout.Name = "TabHoldLayout"
