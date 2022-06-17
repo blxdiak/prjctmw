@@ -254,7 +254,7 @@ if game.CoreGui:FindFirstChild("woof") then
     TaTitle.Parent = LeftFrame
     TaTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     TaTitle.BackgroundTransparency = 1.000
-    TaTitle.Position = UDim2.new(0.113608718, 0, 0.0210487917, 0)
+    TaTitle.Position = UDim2.new(0.113608718, 0, 0.625403643, 0) -- 0.560168743, -325, 0.625403643, -250
     TaTitle.Size = UDim2.new(0, 159, 0, 20)
     TaTitle.Font = Enum.Font.Gotham
     TaTitle.Text = "Tabs"
@@ -740,7 +740,7 @@ if game.CoreGui:FindFirstChild("woof") then
              )
              spawn(function()
                 TweenService:Create(
-                   game.CoreGui.backiground.BackgroundFrame,
+                   game.CoreGui.background.BackgroundFrame,
                    TweenInfo.new(.3, Enum.EasingStyle.Quad),
                    {BackgroundTransparency = 0.6}
                 ):Play()
