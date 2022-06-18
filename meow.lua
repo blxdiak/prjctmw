@@ -91,45 +91,76 @@ if game.CoreGui:FindFirstChild("woof") then
      )
     end
  
+    spawn(function()
+       game:GetService("Players").LocalPlayer.Idled:connect(
+ function()
+     game:GetService("VirtualUser"):Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+     wait(1)
+     game:GetService("VirtualUser"):Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+ end)
+    end)
+ 
  
  local woof = Instance.new("ScreenGui")
  woof.Name = "woof"
  woof.Parent = game.CoreGui
+ spawn(function()
+    pcall(function()
+ if syn then
+    syn.protect_gui(woof)
+ end
+ end)
+ end)
  
- function Mainholder:Window(hubname, gamename, discordlink, halflink)
+ function Mainholder:Window(hubname, gamename)
     local FirstTab = false
  
     local MainFrame = Instance.new("Frame")
     local MainCorner = Instance.new("UICorner")
     local LeftFrame = Instance.new("Frame")
     local LeftFrameCorner = Instance.new("UICorner")
-    local TabHolder = Instance.new("Frame")
+    local TabHolder = Instance.new("ScrollingFrame")
     local TabHoldLayout = Instance.new("UIListLayout")
     local DragFrame = Instance.new("Frame")
     local GameTitle = Instance.new("TextLabel")
     local MainTitle = Instance.new("TextLabel")
-    local lineY = Instance.new("Frame")
     local MainFrameholder = Instance.new("Frame")
-    local OpenClose = Instance.new("TextButton")
-    local OpenCloseCorner = Instance.new("UICorner")
     local Discord = Instance.new("TextButton")
     local DiscordCorner = Instance.new("UICorner")
-    local ScriptHub = Instance.new("TextButton")
-    local ScriptHubCorner = Instance.new("UICorner")
+    local DiscordPadding = Instance.new("UIPadding")
+    local MenuBtn = Instance.new("TextButton")
+    local MenuBtnCorner = Instance.new("UICorner")
+    local MenuBtnPadding = Instance.new("UIPadding")
+    local SettingsFrame = Instance.new("Frame")
+    local SettingsFrameCorner = Instance.new("UICorner")
+    local SettingsFrameShadow = Instance.new("Frame")
+    local SettingsFrameImage = Instance.new("ImageLabel")
+    local SettingsFrameImage_2 = Instance.new("ImageLabel")
+    local SettingsFrameLayout = Instance.new("UIListLayout")
     local Keybind = Instance.new("TextButton")
     local TextKeybind = Instance.new("TextLabel")
     local BindText = Instance.new("TextLabel")
-    local Glow = Instance.new("ImageLabel")
+ 
     local ContainerHold = Instance.new("Frame")
-    local TaTitle = Instance.new("TextLabel")
     local DragFrame2 = Instance.new("Frame")
-    local DragFrame2_2 = Instance.new("Frame")
+    local MainFrameContainerSearch = Instance.new("ScrollingFrame")
+    local MainFrameContainerSearchLayout = Instance.new("UIListLayout")
+    local SettingsButton = Instance.new("TextButton")
+    local ImageLabel = Instance.new("ImageLabel")
+ 
+    local MainSettingsFrame = Instance.new("Frame")
+    local MainSettingsDragFrame = Instance.new("Frame")
+    local MainSettingsFrameCorner = Instance.new("UICorner")
+    local MainSettingsContainer = Instance.new("ScrollingFrame")
+    local MainSettingsContainerLayout = Instance.new("UIListLayout")
+    local MainSettingsTitle = Instance.new("TextLabel")
+    local MainSettingsFrameClose = Instance.new("ImageButton")
  
     MainFrame.Name = "MainFrame"
     MainFrame.Parent = woof
     MainFrame.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
-    MainFrame.Position = UDim2.new(0.560168743, -325, 0.625403643, -250)
-    MainFrame.Size = UDim2.new(0, 0, 0, 0)
+    MainFrame.Position = UDim2.new(0.590548515, -325, 0.683814943, -250)
+    MainFrame.Size = UDim2.new(0, 650, 0, 410)
     -- 0, 650, 0, 410 ^^
     
     MainCorner.CornerRadius = UDim.new(0, 5)
@@ -139,10 +170,9 @@ if game.CoreGui:FindFirstChild("woof") then
     LeftFrame.Name = "LeftFrame"
     LeftFrame.Parent = MainFrame
     LeftFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-    LeftFrame.Position = UDim2.new(0, 0, 0, 0)
-    -- UDim2.new(-0.354520649, 0, 0.00472821482, 0) ^^
-    LeftFrame.Size = UDim2.new(0, 209, 0, 410)
-    LeftFrame.Visible = false
+    LeftFrame.BackgroundTransparency = 1.000
+    LeftFrame.Position = UDim2.new(0.5, -325, 0.609756112, -250)
+    LeftFrame.Size = UDim2.new(0, 199, 0, 350)
     
     LeftFrameCorner.CornerRadius = UDim.new(0, 5)
     LeftFrameCorner.Name = "LeftFrameCorner"
@@ -150,30 +180,19 @@ if game.CoreGui:FindFirstChild("woof") then
     
     TabHolder.Name = "TabHolder"
     TabHolder.Parent = LeftFrame
+    TabHolder.Active = true
     TabHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     TabHolder.BackgroundTransparency = 1.000
-    TabHolder.Position = UDim2.new(0.056721665, 0, 0.113540091, 0)
-    TabHolder.Size = UDim2.new(0, 187, 0, 335)
+    TabHolder.BorderSizePixel = 0
+    TabHolder.Position = UDim2.new(0.0520000011, 0, 0.214000002, 0)
+    TabHolder.Size = UDim2.new(0, 188, 0, 273)
+    TabHolder.ScrollBarThickness = 0
     
     TabHoldLayout.Name = "TabHoldLayout"
     TabHoldLayout.Parent = TabHolder
     TabHoldLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
     TabHoldLayout.SortOrder = Enum.SortOrder.LayoutOrder
     TabHoldLayout.Padding = UDim.new(0, 5)
- 
- 
-    Glow.Name = "Glow"
-    Glow.Parent = LeftFrame
-    Glow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Glow.BackgroundTransparency = 1.000
-    Glow.BorderSizePixel = 0
-    Glow.Position = UDim2.new(0, -15, 0, -15)
-    Glow.Size = UDim2.new(1, 30, 1, 30)
-    Glow.ZIndex = 0
-    Glow.Image = "rbxassetid://4996891970"
-    Glow.ImageColor3 = Color3.fromRGB(15, 15, 15)
-    Glow.ScaleType = Enum.ScaleType.Slice
-    Glow.SliceCenter = Rect.new(20, 20, 280, 280)
  
  
     DragFrame.Name = "DragFrame"
@@ -196,7 +215,6 @@ if game.CoreGui:FindFirstChild("woof") then
     GameTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
     GameTitle.TextSize = 17.000
     GameTitle.TextTransparency = 0.400
-    GameTitle.Visible = false
     
     MainTitle.Name = "MainTitle"
     MainTitle.Parent = MainFrame
@@ -208,15 +226,6 @@ if game.CoreGui:FindFirstChild("woof") then
     MainTitle.Text = hubname
     MainTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
     MainTitle.TextSize = 25.000
-    MainTitle.Visible = false
- 
-    
-    lineY.Name = "lineY"
-    lineY.Parent = MainFrame
-    lineY.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    lineY.Position = UDim2.new(0.304615378, 0, 0.00487804879, 0)
-    lineY.Size = UDim2.new(0, 0, 0, 400)
-    lineY.Visible = false
     
     MainFrameholder.Name = "MainFrameholder"
     MainFrameholder.Parent = MainFrame
@@ -224,7 +233,181 @@ if game.CoreGui:FindFirstChild("woof") then
     MainFrameholder.BackgroundTransparency = 1.000
     MainFrameholder.Position = UDim2.new(0.0153846154, 0, 0.160975605, 0)
     MainFrameholder.Size = UDim2.new(0, 178, 0, 283)
-    MainFrameholder.Visible = false
+    MainFrameholder.Visible = true
+ 
+    SettingsButton.Name = "SettingsButton"
+    SettingsButton.Parent = MainFrameholder
+    SettingsButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    SettingsButton.BackgroundTransparency = 1.000
+    SettingsButton.Position = UDim2.new(3.12026191, 0, -0.215547696, 0)
+    SettingsButton.Size = UDim2.new(0, 43, 0, 29)
+    SettingsButton.Font = Enum.Font.SourceSans
+    SettingsButton.Text = ""
+    SettingsButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+    SettingsButton.TextSize = 14.000
+    
+    ImageLabel.Parent = SettingsButton
+    ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    ImageLabel.BackgroundTransparency = 1.000
+    ImageLabel.Position = UDim2.new(0.282051295, 0, 0.172413796, 0)
+    ImageLabel.Size = UDim2.new(0, 20, 0, 20)
+    ImageLabel.Image = "http://www.roblox.com/asset/?id=6031104648"
+ 
+    local Toggled = false
+    SettingsButton.MouseButton1Click:Connect(function()
+       if Toggled == false then
+ 
+          --{2.455, 0},{-0.417, 0}
+          SettingsFrame.Visible = true
+          TweenService:Create(
+             SettingsFrame,
+             TweenInfo.new(.3, Enum.EasingStyle.Quad),
+             {Position = UDim2.new(2.455, 0, -0.417, 0)}
+          ):Play()
+          repeat wait() until SettingsFrame.Position == UDim2.new(2.455, 0, -0.417, 0)
+          Discord.Visible = true
+          MenuBtn.Visible = true
+          Toggled = true
+       else
+          Discord.Visible = false
+          MenuBtn.Visible = false
+          TweenService:Create(
+             SettingsFrame,
+             TweenInfo.new(.3, Enum.EasingStyle.Quad),
+             {Position = UDim2.new(2.455, 0, -0.195, 0)}
+          ):Play()
+          repeat task.wait() until SettingsFrame.Position == UDim2.new(2.455, 0, -0.195, 0)
+          SettingsFrame.Visible = false
+ 
+          Toggled = false
+       end
+    end)
+ 
+    SettingsFrame.Name = "SettingsFrame"
+    SettingsFrame.Parent = MainFrameholder
+    SettingsFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    SettingsFrame.Position = UDim2.new(2.455, 0, -0.195, 0)
+    SettingsFrame.Size = UDim2.new(1, 0, -0.0212014131, 50)
+    SettingsFrame.Visible = false
+    
+    SettingsFrameCorner.CornerRadius = UDim.new(0, 6)
+    SettingsFrameCorner.Name = "SettingsFrameCorner"
+    SettingsFrameCorner.Parent = SettingsFrame
+ 
+ 
+    Discord.Name = "Discord"
+    Discord.Parent = SettingsFrame
+    Discord.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    Discord.BackgroundTransparency = 1.000
+    Discord.Position = UDim2.new(-3.4289414e-07, 0, 0, 0)
+    Discord.Size = UDim2.new(1.00000072, 0, 0, 20)
+    Discord.Font = Enum.Font.Gotham
+    Discord.Text = "Discord"
+    Discord.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Discord.TextSize = 13.000
+    Discord.TextTransparency = 0.400
+    Discord.TextXAlignment = Enum.TextXAlignment.Left
+    Discord.Visible = false
+    
+    DiscordCorner.CornerRadius = UDim.new(0, 6)
+    DiscordCorner.Name = "DiscordCorner"
+    DiscordCorner.Parent = Discord
+    
+    DiscordPadding.Name = "DiscordPadding"
+    DiscordPadding.Parent = Discord
+    DiscordPadding.PaddingLeft = UDim.new(0, 10)
+ 
+    Discord.MouseButton1Click:Connect(function()
+       Discord.TextSize = 10
+       TweenService:Create(Discord,TweenInfo.new(.1, Enum.EasingStyle.Quad),{TextSize = 13.000}):Play()
+       setclipboard("https://discord.gg/s38pXecnqb")
+       local req = (syn and syn.request) or (http and http.request) or http_request
+       if req then
+           req({
+               Url = 'http://127.0.0.1:6463/rpc?v=1',
+               Method = 'POST',
+               Headers = {
+                   ['Content-Type'] = 'application/json',
+                   Origin = 'https://discord.com'
+               },
+               Body = game:GetService('HttpService'):JSONEncode({
+                   cmd = 'INVITE_BROWSER',
+                   nonce = game:GetService('HttpService'):GenerateGUID(false),
+                   args = {code = 's38pXecnqb'}
+               })
+           })
+       end
+    end)
+ 
+ 
+    MenuBtn.Name = "MenuBtn"
+    MenuBtn.Parent = SettingsFrame
+    MenuBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    MenuBtn.BackgroundTransparency = 1.000
+    MenuBtn.Position = UDim2.new(-3.4289414e-07, 0, 0.454545468, 0)
+    MenuBtn.Size = UDim2.new(1.00000072, 0, 0, 20)
+    MenuBtn.Font = Enum.Font.Gotham
+    MenuBtn.Text = "Settings"
+    MenuBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    MenuBtn.TextSize = 13.000
+    MenuBtn.TextTransparency = 0.400
+    MenuBtn.TextXAlignment = Enum.TextXAlignment.Left
+    MenuBtn.Visible = false
+    
+    MenuBtnCorner.CornerRadius = UDim.new(0, 6)
+    MenuBtnCorner.Name = "MenuBtnCorner"
+    MenuBtnCorner.Parent = MenuBtn
+    
+    MenuBtnPadding.Name = "MenuBtnPadding"
+    MenuBtnPadding.Parent = MenuBtn
+    MenuBtnPadding.PaddingLeft = UDim.new(0, 10)
+ 
+    MenuBtn.MouseButton1Click:Connect(function()
+       MenuBtn.TextSize = 10
+       TweenService:Create(MenuBtn,TweenInfo.new(.1, Enum.EasingStyle.Quad),{TextSize = 13.000}):Play()
+    end)
+ 
+ 
+ 
+ 
+    SettingsFrameShadow.Name = "SettingsFrameShadow"
+    SettingsFrameShadow.Parent = SettingsFrame
+    SettingsFrameShadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    SettingsFrameShadow.BackgroundTransparency = 1.000
+    SettingsFrameShadow.Position = UDim2.new(-0.0168539323, 0, -0.727272749, 0)
+    SettingsFrameShadow.Size = UDim2.new(1, 0, -0.13636364, 50)
+    
+    SettingsFrameImage.Name = "SettingsFrameImage"
+    SettingsFrameImage.Parent = SettingsFrameShadow
+    SettingsFrameImage.AnchorPoint = Vector2.new(0.5, 0.5)
+    SettingsFrameImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    SettingsFrameImage.BackgroundTransparency = 1.000
+    SettingsFrameImage.BorderSizePixel = 0
+    SettingsFrameImage.Position = UDim2.new(0.505617976, 0, -0.409090936, 0)
+    SettingsFrameImage.Size = UDim2.new(1.20000005, 0, 1.20000005, 0)
+    SettingsFrameImage.Visible = false
+    SettingsFrameImage.ZIndex = 7
+    SettingsFrameImage.Image = "rbxassetid://5587865193"
+    SettingsFrameImage.ImageColor3 = Color3.fromRGB(0, 0, 0)
+    SettingsFrameImage.ImageTransparency = 0.900
+    
+    SettingsFrameImage_2.Name = "SettingsFrameImage"
+    SettingsFrameImage_2.Parent = SettingsFrameShadow
+    SettingsFrameImage_2.AnchorPoint = Vector2.new(0.5, 0.5)
+    SettingsFrameImage_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    SettingsFrameImage_2.BackgroundTransparency = 1.000
+    SettingsFrameImage_2.BorderSizePixel = 0
+    SettingsFrameImage_2.Position = UDim2.new(0.5, 0, -0.387454629, 0)
+    SettingsFrameImage_2.Size = UDim2.new(1.60000014, 0, 1.77963626, 0)
+    SettingsFrameImage_2.Visible = false
+    SettingsFrameImage_2.ZIndex = 7
+    SettingsFrameImage_2.Image = "rbxassetid://5587865193"
+    SettingsFrameImage_2.ImageColor3 = Color3.fromRGB(0, 0, 0)
+    SettingsFrameImage_2.ImageTransparency = 0.800
+    
+    SettingsFrameLayout.Name = "SettingsFrameLayout"
+    SettingsFrameLayout.Parent = SettingsFrame
+    SettingsFrameLayout.SortOrder = Enum.SortOrder.LayoutOrder
  
     ContainerHold.Name = "ContainerHold"
     ContainerHold.Parent = MainFrame
@@ -239,27 +422,8 @@ if game.CoreGui:FindFirstChild("woof") then
     DragFrame2.Position = UDim2.new(0, 0, 0.00253169355, 0)
     DragFrame2.Size = UDim2.new(0, 211, 0, 408)
  
-    DragFrame2_2.Name = "DragFrame2"
-    DragFrame2_2.Parent = MainFrame
-    DragFrame2_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    DragFrame2_2.BackgroundTransparency = 1.000
-    DragFrame2_2.Position = UDim2.new(-0.354520649, 0, 0.00253169355, 0)
-    DragFrame2_2.Size = UDim2.new(0, 209, 0, 408)
- 
     MakeDraggable(DragFrame2, MainFrame)
-    MakeDraggable(DragFrame2_2, MainFrame)
  
- 
-    TaTitle.Name = "TaTitle"
-    TaTitle.Parent = LeftFrame
-    TaTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    TaTitle.BackgroundTransparency = 1.000
-    TaTitle.Position = UDim2.new(0.113608718, 0, 0.0210487917, 0) -- 0.560168743, -325, 0.625403643, -250
-    TaTitle.Size = UDim2.new(0, 159, 0, 20)
-    TaTitle.Font = Enum.Font.Gotham
-    TaTitle.Text = "Tabs"
-    TaTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-    TaTitle.TextSize = 25.000
  
     local MainFrameSearch = Instance.new("TextButton")
     local MainFrameSearchIcon = Instance.new("ImageLabel")
@@ -281,6 +445,7 @@ if game.CoreGui:FindFirstChild("woof") then
     MainFrameSearch.TextSize = 14.000
  
     local SearchMainToggled = false
+ 
     MainFrameSearch.MouseButton1Click:Connect(function()
        if SearchMainToggled == false then
           MainFrameSearchBox.PlaceholderText = "Search"
@@ -292,6 +457,7 @@ if game.CoreGui:FindFirstChild("woof") then
           ):Play()
           repeat wait() until MainFrameSearchBox.BackgroundTransparency == 0
           SearchMainToggled = true
+          MainFrameSearchBox.Visible = true
        else
           MainFrameSearchBox.PlaceholderText = ""
           TweenService:Create(
@@ -299,7 +465,7 @@ if game.CoreGui:FindFirstChild("woof") then
              TweenInfo.new(.3, Enum.EasingStyle.Quad),
              {BackgroundTransparency = 1}
           ):Play()
-          repeat wait() until MainFrameSearchBox.BackgroundTransparency == 1
+          repeat task.wait() until MainFrameSearchBox.BackgroundTransparency == 1
           SearchMainToggled = false
           MainFrameSearchBox.Visible = false
        end
@@ -313,8 +479,8 @@ if game.CoreGui:FindFirstChild("woof") then
     MainFrameSearchIcon.Position = UDim2.new(0.5, 0, 0.5, 0)
     MainFrameSearchIcon.Size = UDim2.new(0, 14, 0, 14)
     MainFrameSearchIcon.Image = "http://www.roblox.com/asset/?id=6521439400"
-    MainFrameSearchIcon.ImageTransparency = 1
-    MainFrameSearchIcon.Visible = false
+    MainFrameSearchIcon.ImageTransparency = 0
+    MainFrameSearchIcon.Visible = true
     
     MainFrameSearchBox.Name = "MainFrameSearchBox"
     MainFrameSearchBox.Parent = MainFrame
@@ -338,210 +504,8 @@ if game.CoreGui:FindFirstChild("woof") then
     
     MainFrameSearchBoxCorner.Name = "MainFrameSearchBoxCorner"
     MainFrameSearchBoxCorner.Parent = MainFrameSearchBox
-    
-    OpenClose.Name = "OpenClose"
-    OpenClose.Parent = MainFrameholder
-    OpenClose.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-    OpenClose.Position = UDim2.new(0.0321919285, 0, 0.0898051411, 0)
-    OpenClose.Size = UDim2.new(0, 170, 0, 40)
-    OpenClose.AutoButtonColor = false
-    OpenClose.Font = Enum.Font.Gotham
-    OpenClose.Text = "Hide Tabs"
-    OpenClose.TextColor3 = Color3.fromRGB(255, 255, 255)
-    OpenClose.TextSize = 20.000
  
-    OpenClose.MouseEnter:Connect(function()
-       TweenService:Create(
-          OpenClose,
-          TweenInfo.new(.3, Enum.EasingStyle.Quad),
-          {BackgroundColor3 = Color3.fromRGB(45, 45, 45)}
-       ):Play()
-    end)
- 
-    OpenClose.MouseLeave:Connect(function()
-       TweenService:Create(
-          OpenClose,
-          TweenInfo.new(.3, Enum.EasingStyle.Quad),
-          {BackgroundColor3 = Color3.fromRGB(35, 35, 35)}
-       ):Play()
-    end)
- 
-    OpenClose.MouseButton1Click:Connect(function()
-       OpenClose.TextSize = 0
-       TweenService:Create(
-          OpenClose,
-          TweenInfo.new(.3, Enum.EasingStyle.Quad),
-          {TextSize = 25.000}
-       ):Play()
-       TweenService:Create(
-          OpenClose,
-          TweenInfo.new(.3, Enum.EasingStyle.Quad),
-          {TextSize = 20.000}
-       ):Play()
-    end)
- 
-    local TabHoToggled = false
-    OpenClose.MouseButton1Click:Connect(function()
-       if TabHoToggled == false then
-          OpenClose.Text = "Show Tabs"
-          TabHoToggled = true
-       else
-          OpenClose.Text = "Hide Tabs"
-          TabHoToggled = false
-       end
-    end)
- 
-    OpenClose.MouseButton1Click:Connect(function()
-       if TabHoToggled == false then
-          TaTitle.Visible = false
-          TabHolder.Visible = false
-          Glow.Visible = false
-          TweenService:Create(
-             LeftFrame,
-             TweenInfo.new(.3, Enum.EasingStyle.Quad),
-          {Position = UDim2.new(0, 0, 0, 0)}
-          ):Play()
-       repeat wait() until LeftFrame.Position == UDim2.new(0, 0, 0, 0)
-       LeftFrame.Visible = false
-       else
-          LeftFrame.Visible = true
-          TweenService:Create(
-             LeftFrame,
-             TweenInfo.new(.3, Enum.EasingStyle.Quad),
-          {Position = UDim2.new(-0.354520649, 0, 0.00472821482, 0)}
-          ):Play()
-          repeat wait() until LeftFrame.Position == UDim2.new(-0.354520649, 0, 0.00472821482, 0)
-          
-          TabHolder.Visible = true
-          TaTitle.Visible = true
-          Glow.Visible = true
-       end
-    end)
-    
-    OpenCloseCorner.CornerRadius = UDim.new(0, 6)
-    OpenCloseCorner.Name = "OpenCloseCorner"
-    OpenCloseCorner.Parent = OpenClose
-    
-    Discord.Name = "Discord"
-    Discord.Parent = MainFrameholder
-    Discord.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-    Discord.Position = UDim2.new(0.0321919285, 0, 0.312419981, 0)
-    Discord.Size = UDim2.new(0, 170, 0, 40)
-    Discord.AutoButtonColor = false
-    Discord.Font = Enum.Font.Gotham
-    Discord.Text = "Discord"
-    Discord.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Discord.TextSize = 20.000
- 
-    Discord.MouseEnter:Connect(function()
-       TweenService:Create(
-          Discord,
-          TweenInfo.new(.3, Enum.EasingStyle.Quad),
-          {BackgroundColor3 = Color3.fromRGB(45, 45, 45)}
-       ):Play()
-    end)
- 
-    Discord.MouseLeave:Connect(function()
-       TweenService:Create(
-          Discord,
-          TweenInfo.new(.3, Enum.EasingStyle.Quad),
-          {BackgroundColor3 = Color3.fromRGB(35, 35, 35)}
-       ):Play()
-    end)
- 
-    Discord.MouseButton1Click:Connect(function()
-       Discord.TextSize = 0
-       TweenService:Create(
-          Discord,
-          TweenInfo.new(.3, Enum.EasingStyle.Quad),
-          {TextSize = 25.000}
-       ):Play()
-       TweenService:Create(
-          Discord,
-          TweenInfo.new(.3, Enum.EasingStyle.Quad),
-          {TextSize = 20.000}
-       ):Play()
-    end)
- 
-    Discord.MouseButton1Click:Connect(function()
-       setclipboard(discordlink)
-             local req = (syn and syn.request) or (http and http.request) or http_request
-             if req then
-                 req({
-                     Url = 'http://127.0.0.1:6463/rpc?v=1',
-                     Method = 'POST',
-                     Headers = {
-                         ['Content-Type'] = 'application/json',
-                         Origin = 'https://discord.com'
-                     },
-                     Body = game:GetService('HttpService'):JSONEncode({
-                         cmd = 'INVITE_BROWSER',
-                         nonce = game:GetService('HttpService'):GenerateGUID(false),
-                         args = {code = halflink}
-                     })
-                 })
-             end
-    end)
-    
-    DiscordCorner.CornerRadius = UDim.new(0, 6)
-    DiscordCorner.Name = "DiscordCorner"
-    DiscordCorner.Parent = Discord
-    
-    ScriptHub.Name = "ScriptHub"
-    ScriptHub.Parent = MainFrameholder
-    ScriptHub.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-    ScriptHub.Position = UDim2.new(0.0321919285, 0, 0.526183844, 0)
-    ScriptHub.Size = UDim2.new(0, 170, 0, 40)
-    ScriptHub.AutoButtonColor = false
-    ScriptHub.Font = Enum.Font.Gotham
-    ScriptHub.Text = "ScriptHub"
-    ScriptHub.TextColor3 = Color3.fromRGB(255, 255, 255)
-    ScriptHub.TextSize = 20.000
- 
-    ScriptHub.MouseEnter:Connect(function()
-       TweenService:Create(
-          ScriptHub,
-          TweenInfo.new(.3, Enum.EasingStyle.Quad),
-          {BackgroundColor3 = Color3.fromRGB(45, 45, 45)}
-       ):Play()
-    end)
- 
-    ScriptHub.MouseLeave:Connect(function()
-       TweenService:Create(
-          ScriptHub,
-          TweenInfo.new(.3, Enum.EasingStyle.Quad),
-          {BackgroundColor3 = Color3.fromRGB(35, 35, 35)}
-       ):Play()
-    end)
- 
-    ScriptHub.MouseButton1Click:Connect(function()
-       ScriptHub.TextSize = 0
-       TweenService:Create(
-          ScriptHub,
-          TweenInfo.new(.3, Enum.EasingStyle.Quad),
-          {TextSize = 25.000}
-       ):Play()
-       TweenService:Create(
-          ScriptHub,
-          TweenInfo.new(.3, Enum.EasingStyle.Quad),
-          {TextSize = 20.000}
-       ):Play()
-    end)
- 
-    ScriptHub.MouseButton1Click:Connect(function()
-       if game.CoreGui:FindFirstChild("ScriptBloxSearcher") then
-          game:GetService("CoreGui").ScriptBloxSearcher.MainFrame.Visible = true
-      else
-          loadstring(game:HttpGet("https://pastebin.com/raw/JZs1kNAT"))()
-      end
-    end)
-    
-    ScriptHubCorner.CornerRadius = UDim.new(0, 6)
-    ScriptHubCorner.Name = "ScriptHubCorner"
-    ScriptHubCorner.Parent = ScriptHub
-    
- 
- 
+ --[[
     Keybind.Name = "Keybind"
     Keybind.Parent = MainFrameholder
     Keybind.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
@@ -575,7 +539,68 @@ if game.CoreGui:FindFirstChild("woof") then
     BindText.Font = Enum.Font.SourceSans
     BindText.Text = "Rightcontrol"
     BindText.TextColor3 = Color3.fromRGB(255, 255, 255)
-    BindText.TextSize = 18.000
+    BindText.TextSize = 18.000]]
+ 
+    local Bind = Instance.new("TextButton")
+    local Title = Instance.new("TextLabel")
+    local Desc = Instance.new("TextLabel")
+    local BText = Instance.new("TextLabel")
+    local BindCorner = Instance.new("UICorner")
+ 
+    Bind.Name = "Bind"
+    Bind.Parent = MainSettingsContainer
+    Bind.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    Bind.Position = UDim2.new(0.0567428395, 0, 0.16803278, 0)
+    Bind.Size = UDim2.new(0.910000026, 0, 0.00800000038, 34)
+    Bind.AutoButtonColor = false
+    Bind.Font = Enum.Font.SourceSans
+    Bind.TextColor3 = Color3.fromRGB(0, 0, 0)
+    Bind.TextSize = 14.000
+    Bind.TextTransparency = 1.000
+    Bind.TextXAlignment = Enum.TextXAlignment.Left
+    
+    Title.Name = "Title"
+    Title.Parent = Bind
+    Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Title.BackgroundTransparency = 1.000
+    Title.Position = UDim2.new(0, 13, 0, 0)
+    Title.Size = UDim2.new(0.287203521, 1, 0.5, 0)
+    Title.Font = Enum.Font.Gotham
+    Title.Text = "Close Bind"
+    Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Title.TextSize = 14.000
+    Title.TextXAlignment = Enum.TextXAlignment.Left
+    
+    Desc.Name = "Desc"
+    Desc.Parent = Bind
+    Desc.AnchorPoint = Vector2.new(0, 1)
+    Desc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Desc.BackgroundTransparency = 1.000
+    Desc.Position = UDim2.new(0.0205142926, 5, 0.988621473, 0)
+    Desc.Size = UDim2.new(0.589060307, 1, 0.5, 0)
+    Desc.Font = Enum.Font.Gotham
+    Desc.Text = "Hides/Shows the main window."
+    Desc.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Desc.TextSize = 12.000
+    Desc.TextTransparency = 0.400
+    Desc.TextXAlignment = Enum.TextXAlignment.Left
+    
+    BText.Name = "BText"
+    BText.Parent = Bind
+    BText.AnchorPoint = Vector2.new(1, 0)
+    BText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    BText.BackgroundTransparency = 1.000
+    BText.Position = UDim2.new(0.982375741, -5, 0.077415362, 0)
+    BText.Selectable = true
+    BText.Size = UDim2.new(0, 90, 0, 32)
+    BText.Font = Enum.Font.Gotham
+    BText.Text = "RightControl"
+    BText.TextColor3 = Color3.fromRGB(255, 255, 255)
+    BText.TextSize = 14.000
+    BText.TextXAlignment = Enum.TextXAlignment.Right
+    
+    BindCorner.Name = "BindCorner"
+    BindCorner.Parent = Bind
  
     local keybind_data = {}
  
@@ -615,7 +640,7 @@ if game.CoreGui:FindFirstChild("woof") then
  
           function keybind_data:SetKeybind(Keybind)
              local key = shortkeys[Keybind.Name] or Keybind.Name
-             BindText.Text = key
+             BText.Text = key
              keybind = Keybind
           end
    
@@ -634,160 +659,97 @@ if game.CoreGui:FindFirstChild("woof") then
    
           keybind_data:SetKeybind(keybind_options.standard)
  
-          local UwU = loadstring(game:HttpGet("https://pastebin.com/raw/1nC4bRzU"))()
  
-    Keybind.MouseButton1Click:Connect(function()
+          Bind.MouseButton1Click:Connect(function()
              if checks.binding then return end
-             BindText.Text = "[...]"
+             BText.Text = "[...]"
              checks.binding = true
              local a, b = UIS.InputBegan:Wait()
              keybind_data:SetKeybind(a.KeyCode)
      end)
  
- 
+     local settingsToggled = nil
+     MenuBtn.MouseButton1Click:Connect(function()
+       settingsToggled = false
+    end)
      local uitoggled = false
    UserInputService.InputBegan:Connect(
     function(io, p)
-       if io.KeyCode == Enum.KeyCode[game:GetService("CoreGui").woof.MainFrame.MainFrameholder.Keybind.BindText.Text] then
+       if io.KeyCode == Enum.KeyCode[game:GetService("CoreGui").woof.MainSettingsFrame.MainSettingsContainer.Bind.BText.Text] then
           if uitoggled == false then
-             TaTitle.Visible = false
-             TabHolder.Visible = false
-             Glow.Visible = false
-             ContainerHold.Visible = false
-             MainFrameSearchBox.PlaceholderText = ""
              spawn(function()
-                TweenService:Create(
-                   MainFrameSearchIcon,
-                   TweenInfo.new(.3, Enum.EasingStyle.Quad),
-                   {ImageTransparency = 1}
-                ):Play()
-                repeat wait() until MainFrameSearchIcon.ImageTransparency == 1
-                MainFrameSearchIcon.Visible = false
-                TweenService:Create(
-                   MainFrameSearchBox,
-                   TweenInfo.new(.3, Enum.EasingStyle.Quad),
-                   {BackgroundTransparency = 1}
-                ):Play()
+                if settingsToggled == false then
+                   MainSettingsContainer.Visible = false
+                   MainSettingsTitle.Visible = false
+                   MainSettingsFrameClose.Visible = false
+                   TweenService:Create(
+                      MainSettingsFrame,
+                      TweenInfo.new(.3, Enum.EasingStyle.Quad),
+                      {BackgroundTransparency = 1}
+                   ):Play()
+       
+                   repeat wait() until MainSettingsFrame.BackgroundTransparency == 1
+                   MainSettingsFrame.Visible = false
+                   settingsToggled = true
+                end
              end)
-             TweenService:Create(
-                LeftFrame,
-                TweenInfo.new(.3, Enum.EasingStyle.Quad),
-             {Position = UDim2.new(0, 0, 0, 0)}
-             ):Play()
-             repeat wait() until LeftFrame.Position == UDim2.new(0, 0, 0, 0)
  
-             LeftFrame.Visible = false
+             ContainerHold.Visible = false
              MainFrameholder.Visible = false
+             LeftFrame.Visible = false
              GameTitle.Visible = false
              MainTitle.Visible = false
-             lineY.Visible = false
+             MainFrameSearch.Visible = false
+             MainFrameSearchBox.Visible = false
  
-             MainFrame:TweenSize(
-                UDim2.new(0, 650, 0, 0),
-                Enum.EasingDirection.In,
-                Enum.EasingStyle.Quad,
-                0.3,
-                false
-             )
-             repeat wait() until MainFrame.Size == UDim2.new(0, 650, 0, 0)
+             TweenService:Create(
+                MainFrame,
+                TweenInfo.new(.3, Enum.EasingStyle.Quad),
+                {BackgroundTransparency = 1}
+             ):Play()
  
-             MainFrame:TweenSize(
-                UDim2.new(0, 0, 0, 0),
-                Enum.EasingDirection.In,
-                Enum.EasingStyle.Quad,
-                0.3,
-                false
-             )
-             spawn(function()
-                TweenService:Create(
-                   game.CoreGui.Background.BackgroundFrame,
-                   TweenInfo.new(.3, Enum.EasingStyle.Quad),
-                   {BackgroundTransparency = 1}
-                ):Play()
-             end)
- 
-             if game.CoreGui:FindFirstChild("backiground") then
-                TweenService:Create(
-                   game.CoreGui.backiground.BackgroundFrame,
-                   TweenInfo.new(.3, Enum.EasingStyle.Quad),
-                   {BackgroundTransparency = 1}
-               ):Play()
-             end
-             repeat wait() until MainFrame.Size == UDim2.new(0, 0, 0, 0)
-             
+             repeat wait() until MainFrame.BackgroundTransparency == 1
              MainFrame.Visible = false
              uitoggled = true
           else
  
+             spawn(function()
+                if settingsToggled == true then
+                   MainSettingsFrame.Visible = true
+                   TweenService:Create(
+                      MainSettingsFrame,
+                      TweenInfo.new(.3, Enum.EasingStyle.Quad),
+                      {BackgroundTransparency = 0}
+                   ):Play()
+       
+                   repeat wait() until MainSettingsFrame.BackgroundTransparency == 0
+                   MainSettingsContainer.Visible = true
+                   MainSettingsTitle.Visible = true
+                   MainSettingsFrameClose.Visible = true
+                   settingsToggled = false
+                end
+             end)
+ 
              MainFrame.Visible = true
  
-             spawn(function()
-                TweenService:Create(
-                   MainFrameSearchIcon,
-                   TweenInfo.new(.3, Enum.EasingStyle.Quad),
-                   {ImageTransparency = 0.400}
-                ):Play()
-                repeat wait() until MainFrameSearchIcon.ImageTransparency == 0.400
-                MainFrameSearchIcon.Visible = true
-             end)
- 
-             MainFrame:TweenSize(
-                UDim2.new(0, 650, 0, 0),
-                Enum.EasingDirection.In,
-                Enum.EasingStyle.Quad,
-                0.3,
-                false
-             )
-             spawn(function()
-                TweenService:Create(
-                   game.CoreGui.background.BackgroundFrame,
-                   TweenInfo.new(.3, Enum.EasingStyle.Quad),
-                   {BackgroundTransparency = 0.6}
-                ):Play()
-             end)
- 
-             repeat wait() until MainFrame.Size == UDim2.new(0, 650, 0, 0)
- 
-             MainFrame:TweenSize(
-                UDim2.new(0, 650, 0, 410),
-                Enum.EasingDirection.In,
-                Enum.EasingStyle.Quad,
-                0.3,
-                false
-             )
-             if game.CoreGui:FindFirstChild("backiground") then
-                TweenService:Create(
-                   game.CoreGui.backiground.BackgroundFrame,
-                   TweenInfo.new(.3, Enum.EasingStyle.Quad),
-                   {BackgroundTransparency = 0.6}
-               ):Play()
-             end
-             repeat wait() until MainFrame.Size == UDim2.new(0, 650, 0, 410)
- 
-             MainFrameSearchBox.PlaceholderText = "Search"
              TweenService:Create(
-                MainFrameSearchBox,
+                MainFrame,
                 TweenInfo.new(.3, Enum.EasingStyle.Quad),
                 {BackgroundTransparency = 0}
              ):Play()
  
-             LeftFrame.Visible = true
+             repeat wait() until MainFrame.BackgroundTransparency == 0
+             ContainerHold.Visible = true
              MainFrameholder.Visible = true
+             LeftFrame.Visible = true
              GameTitle.Visible = true
              MainTitle.Visible = true
-             lineY.Visible = true
- 
-             TweenService:Create(
-                LeftFrame,
-                TweenInfo.new(.3, Enum.EasingStyle.Quad),
-             {Position = UDim2.new(-0.354520649, 0, 0.00472821482, 0)}
-             ):Play()
-             repeat wait() until LeftFrame.Position == UDim2.new(-0.354520649, 0, 0.00472821482, 0)
-             TabHolder.Visible = true
-             TaTitle.Visible = true
-             Glow.Visible = true
-             ContainerHold.Visible = true
-             MainFrameSearchIcon.Visible = true
+             MainFrameSearch.Visible = true
+             if MainFrameSearchBox.Visible == false then
+             else
+                MainFrameSearchBox.Visible = true
+             end
+             
  
              uitoggled = false
           end
@@ -795,42 +757,248 @@ if game.CoreGui:FindFirstChild("woof") then
           end)
  
  
-    TweenService:Create(
-       MainFrame,
-       TweenInfo.new(.3, Enum.EasingStyle.Quad),
-       {Size = UDim2.new(0, 650, 0, 0)}
-    ):Play()
+          MenuBtn.MouseButton1Click:Connect(function()
+             MainSettingsFrame.Visible = true
+             TweenService:Create(
+                MainSettingsFrame,
+                TweenInfo.new(.3, Enum.EasingStyle.Quad),
+                {BackgroundTransparency = 0}
+             ):Play()
  
-    repeat wait() until MainFrame.Size == UDim2.new(0, 650, 0, 0)
-    TweenService:Create(
-       MainFrame,
-       TweenInfo.new(.3, Enum.EasingStyle.Quad),
-       {Size = UDim2.new(0, 650, 0, 410)}
-    ):Play()
-    repeat wait() until MainFrame.Size == UDim2.new(0, 650, 0, 410)
-    LeftFrame.Visible = true
-    TweenService:Create(
-       LeftFrame,
-       TweenInfo.new(.3, Enum.EasingStyle.Quad),
-    {Position = UDim2.new(-0.354520649, 0, 0.00472821482, 0)}
-    ):Play()
-    repeat wait() until LeftFrame.Position == UDim2.new(-0.354520649, 0, 0.00472821482, 0)
-    MainFrameholder.Visible = true
-    GameTitle.Visible = true
-    MainTitle.Visible = true
-    lineY.Visible = true
-    MainFrameSearchIcon.Visible = true
-    MainFrameSearchBox.PlaceholderText = "Search"
-    TweenService:Create(
-       MainFrameSearchIcon,
-       TweenInfo.new(.3, Enum.EasingStyle.Quad),
-       {ImageTransparency = 0.400}
-    ):Play()
-    TweenService:Create(
-       MainFrameSearchBox,
-       TweenInfo.new(.3, Enum.EasingStyle.Quad),
-       {BackgroundTransparency = 0}
-    ):Play()
+             repeat wait() until MainSettingsFrame.BackgroundTransparency == 0
+ 
+             MainSettingsContainer.Visible = true
+             MainSettingsTitle.Visible = true
+             MainSettingsFrameClose.Visible = true
+          end)
+ 
+          function Ripple(Object)
+             spawn(function()
+                local Circle = Instance.new("ImageLabel")
+                Circle.Parent = Object
+                Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                Circle.BackgroundTransparency = 1.000
+                Circle.ZIndex = 10
+                Circle.Image = "rbxassetid://266543268"
+                Circle.ImageColor3 = Color3.fromRGB(210,210,210)
+                Circle.ImageTransparency = 0.8
+                Circle.Position = UDim2.new(0, Mouse.X - Circle.AbsolutePosition.X, 0, Mouse.Y - Circle.AbsolutePosition.Y)
+                local Size = Object.AbsoluteSize.X
+                TweenService:Create(Circle, TweenInfo.new(0.5), {Position = UDim2.fromScale(math.clamp(Mouse.X - Object.AbsolutePosition.X, 0, Object.AbsoluteSize.X)/Object.AbsoluteSize.X,Object,math.clamp(Mouse.Y - Object.AbsolutePosition.Y, 0, Object.AbsoluteSize.Y)/Object.AbsoluteSize.Y) - UDim2.fromOffset(Size/2,Size/2), ImageTransparency = 1, Size = UDim2.fromOffset(Size,Size)}):Play()
+                spawn(function()
+                   wait(0.5)
+                   Circle:Destroy()
+                end)
+             end)
+          end
+ 
+ 
+          local ScriptHub = Instance.new("TextButton")
+          local ScriptHubTitle = Instance.new("TextLabel")
+          local ScriptHubDesc = Instance.new("TextLabel")
+          local ScriptHubCorner = Instance.new("UICorner")
+ 
+          ScriptHub.Name = "ScriptHub"
+          ScriptHub.Parent = MainSettingsContainer
+          ScriptHub.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+          ScriptHub.Position = UDim2.new(0.0450380854, 0, 0.180327863, 0)
+          ScriptHub.Size = UDim2.new(0.909923851, 0, 0.00819672085, 34)
+          ScriptHub.AutoButtonColor = false
+          ScriptHub.Font = Enum.Font.SourceSans
+          ScriptHub.TextColor3 = Color3.fromRGB(0, 0, 0)
+          ScriptHub.TextSize = 14.000
+          ScriptHub.TextTransparency = 1.000
+          ScriptHub.TextXAlignment = Enum.TextXAlignment.Left
+ 
+          ScriptHub.MouseButton1Click:Connect(function()
+             Ripple(ScriptHub)
+         end)
+ 
+         ScriptHub.MouseButton1Click:Connect(function()
+          if game.CoreGui:FindFirstChild("ScriptBloxSearcher") then
+              game:GetService("CoreGui").ScriptBloxSearcher.MainFrame.Visible = true
+          else
+              loadstring(game:HttpGet("https://gitlab.com/L1ZOT/test-project/-/raw/main/Script-Hub"))()
+          end
+      end)
+          
+          ScriptHubTitle.Name = "ScriptHubTitle"
+          ScriptHubTitle.Parent = ScriptHub
+          ScriptHubTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+          ScriptHubTitle.BackgroundTransparency = 1.000
+          ScriptHubTitle.Position = UDim2.new(0, 13, 0, 0)
+          ScriptHubTitle.Size = UDim2.new(0.287203521, 1, 0.5, 0)
+          ScriptHubTitle.Font = Enum.Font.Gotham
+          ScriptHubTitle.Text = "Script Hub"
+          ScriptHubTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+          ScriptHubTitle.TextSize = 14.000
+          ScriptHubTitle.TextXAlignment = Enum.TextXAlignment.Left
+          
+          ScriptHubDesc.Name = "ScriptHubDesc"
+          ScriptHubDesc.Parent = ScriptHub
+          ScriptHubDesc.AnchorPoint = Vector2.new(0, 1)
+          ScriptHubDesc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+          ScriptHubDesc.BackgroundTransparency = 1.000
+          ScriptHubDesc.Position = UDim2.new(0.0234451853, 5, 1.01473689, 0)
+          ScriptHubDesc.Size = UDim2.new(0.589060307, 1, 0.5, 0)
+          ScriptHubDesc.Font = Enum.Font.Gotham
+          ScriptHubDesc.Text = "Opens a new window connected to Scriptblox."
+          ScriptHubDesc.TextColor3 = Color3.fromRGB(255, 255, 255)
+          ScriptHubDesc.TextSize = 12.000
+          ScriptHubDesc.TextTransparency = 0.400
+          ScriptHubDesc.TextXAlignment = Enum.TextXAlignment.Left
+          
+          ScriptHubCorner.Name = "ScriptHubCorner"
+          ScriptHubCorner.Parent = ScriptHub
+ 
+ 
+          local DiscordBut = Instance.new("TextButton")
+          local DiscordButTitle = Instance.new("TextLabel")
+          local DiscordButDesc = Instance.new("TextLabel")
+          local DiscordButCorner = Instance.new("UICorner")
+ 
+          DiscordBut.Name = "DiscordBut"
+          DiscordBut.Parent = MainSettingsContainer
+          DiscordBut.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+          DiscordBut.Position = UDim2.new(0.0450380854, 0, 0.180327863, 0)
+          DiscordBut.Size = UDim2.new(0.909923851, 0, 0.00819672085, 34)
+          DiscordBut.AutoButtonColor = false
+          DiscordBut.Font = Enum.Font.SourceSans
+          DiscordBut.TextColor3 = Color3.fromRGB(0, 0, 0)
+          DiscordBut.TextSize = 14.000
+          DiscordBut.TextTransparency = 1.000
+          DiscordBut.TextXAlignment = Enum.TextXAlignment.Left
+ 
+          DiscordBut.MouseButton1Click:Connect(function()
+             Ripple(DiscordBut)
+         end)
+ 
+       DiscordBut.MouseButton1Click:Connect(function()
+          spawn(function()
+             pcall(function()
+                 local req = (syn and syn.request) or (http and http.request) or http_request
+                 if req then
+                     req({
+                         Url = 'http://127.0.0.1:6463/rpc?v=1',
+                         Method = 'POST',
+                         Headers = {
+                             ['Content-Type'] = 'application/json',
+                             Origin = 'https://discord.com'
+                         },
+                         Body = game:GetService('HttpService'):JSONEncode({
+                             cmd = 'INVITE_BROWSER',
+                             nonce = game:GetService('HttpService'):GenerateGUID(false),
+                             args = {code = "s38pXecnqb"}
+                         })
+                     })
+                 end
+             end)
+          end)
+       end)
+          
+          DiscordButTitle.Name = "DiscordButTitle"
+          DiscordButTitle.Parent = DiscordBut
+          DiscordButTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+          DiscordButTitle.BackgroundTransparency = 1.000
+          DiscordButTitle.Position = UDim2.new(0, 13, 0, 0)
+          DiscordButTitle.Size = UDim2.new(0.287203521, 1, 0.5, 0)
+          DiscordButTitle.Font = Enum.Font.Gotham
+          DiscordButTitle.Text = "Discord"
+          DiscordButTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+          DiscordButTitle.TextSize = 14.000
+          DiscordButTitle.TextXAlignment = Enum.TextXAlignment.Left
+          
+          DiscordButDesc.Name = "DiscordButDesc"
+          DiscordButDesc.Parent = DiscordBut
+          DiscordButDesc.AnchorPoint = Vector2.new(0, 1)
+          DiscordButDesc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+          DiscordButDesc.BackgroundTransparency = 1.000
+          DiscordButDesc.Position = UDim2.new(0.0234451853, 5, 1.01473689, 0)
+          DiscordButDesc.Size = UDim2.new(0.589060307, 1, 0.5, 0)
+          DiscordButDesc.Font = Enum.Font.Gotham
+          DiscordButDesc.Text = "Directly joins Saint X's Discord Server"
+          DiscordButDesc.TextColor3 = Color3.fromRGB(255, 255, 255)
+          DiscordButDesc.TextSize = 12.000
+          DiscordButDesc.TextTransparency = 0.400
+          DiscordButDesc.TextXAlignment = Enum.TextXAlignment.Left
+          
+          DiscordButCorner.Name = "DiscordButCorner"
+          DiscordButCorner.Parent = DiscordBut
+ 
+ 
+ 
+    MainSettingsFrame.Name = "MainSettingsFrame"
+    MainSettingsFrame.Parent = woof
+    MainSettingsFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    MainSettingsFrame.Position = UDim2.new(0.118236467, 0, 0.325320512, 0)
+    MainSettingsFrame.Size = UDim2.new(0, 389, 0, 297)
+    MainSettingsFrame.BackgroundTransparency = 1.000
+    MainSettingsFrame.Visible = false
+    
+    MainSettingsDragFrame.Name = "MainSettingsDragFrame"
+    MainSettingsDragFrame.Parent = MainSettingsFrame
+    MainSettingsDragFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    MainSettingsDragFrame.BackgroundTransparency = 1.000
+    MainSettingsDragFrame.Size = UDim2.new(0, 389, 0, 45)
+ 
+    MakeDraggable(MainSettingsDragFrame, MainSettingsFrame)
+    
+    MainSettingsFrameCorner.Name = "MainSettingsFrameCorner"
+    MainSettingsFrameCorner.Parent = MainSettingsFrame
+ 
+    MainSettingsFrameClose.Name = "MainSettingsFrameClose"
+    MainSettingsFrameClose.Parent = MainSettingsFrame
+    MainSettingsFrameClose.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    MainSettingsFrameClose.BackgroundTransparency = 1.000
+    MainSettingsFrameClose.Position = UDim2.new(0.915167093, 0, 0.0134680131, 0)
+    MainSettingsFrameClose.Size = UDim2.new(0, 31, 0, 26)
+    MainSettingsFrameClose.Image = "rbxassetid://6031094678"
+    MainSettingsFrameClose.Visible = false
+ 
+    MainSettingsFrameClose.MouseButton1Click:Connect(function()
+       MainSettingsContainer.Visible = false
+       MainSettingsTitle.Visible = false
+       MainSettingsFrameClose.Visible = false
+       TweenService:Create(
+          MainSettingsFrame,
+          TweenInfo.new(.3, Enum.EasingStyle.Quad),
+          {BackgroundTransparency = 1}
+       ):Play()
+       repeat wait() until MainSettingsFrame.BackgroundTransparency == 1
+       MainSettingsFrame.Visible = false
+       settingsToggled = nil
+    end)
+    
+    MainSettingsContainer.Name = "MainSettingsContainer"
+    MainSettingsContainer.Parent = MainSettingsFrame
+    MainSettingsContainer.Active = true
+    MainSettingsContainer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    MainSettingsContainer.BackgroundTransparency = 1.000
+    MainSettingsContainer.BorderSizePixel = 0
+    MainSettingsContainer.Position = UDim2.new(0.0205655526, 0, 0.151515156, 0)
+    MainSettingsContainer.Size = UDim2.new(0, 375, 0, 244)
+    MainSettingsContainer.ScrollBarThickness = 8
+    MainSettingsContainer.Visible = false
+ 
+    MainSettingsContainerLayout.Name = "MainSettingsContainerLayout"
+    MainSettingsContainerLayout.Parent = MainSettingsContainer
+    MainSettingsContainerLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+    MainSettingsContainerLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    MainSettingsContainerLayout.Padding = UDim.new(0, 10)
+    
+    MainSettingsTitle.Name = "MainSettingsTitle"
+    MainSettingsTitle.Parent = MainSettingsFrame
+    MainSettingsTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    MainSettingsTitle.BackgroundTransparency = 1.000
+    MainSettingsTitle.BorderColor3 = Color3.fromRGB(27, 42, 53)
+    MainSettingsTitle.Size = UDim2.new(0, 389, 0, 50)
+    MainSettingsTitle.Font = Enum.Font.Gotham
+    MainSettingsTitle.Text = "Settings"
+    MainSettingsTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+    MainSettingsTitle.TextSize = 30.000
+    MainSettingsTitle.Visible = false
+ 
+ 
  
  local Tabs = {}
  function Tabs:Tab(Title)
@@ -851,7 +1019,7 @@ if game.CoreGui:FindFirstChild("woof") then
     Tab.Text = ""
     Tab.TextColor3 = Color3.fromRGB(0, 0, 0)
     Tab.TextSize = 15.000
-    Tab.BackgroundTransparency = 1.000
+    Tab.BackgroundTransparency = 1
     
     TabCorner.CornerRadius = UDim.new(0, 3)
     TabCorner.Name = "TabCorner"
@@ -869,7 +1037,7 @@ if game.CoreGui:FindFirstChild("woof") then
     TabTitle.TextSize = 17.000
     TabTitle.TextXAlignment = Enum.TextXAlignment.Left
     
-    TabGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 17, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 162, 255))}
+    TabGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(13, 45, 226)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 153, 255))}
     TabGradient.Name = "TabGradient"
     TabGradient.Parent = Tab
  
@@ -886,7 +1054,11 @@ if game.CoreGui:FindFirstChild("woof") then
     Container.CanvasPosition = Vector2.new(0, 600)
     Container.Visible = false
  
-    
+    local ContainerPadding = Instance.new("UIPadding")
+    ContainerPadding.Name = "ContainerPadding"
+    ContainerPadding.Parent = Container
+    ContainerPadding.PaddingTop = UDim.new(0, 5)
+    ContainerPadding.PaddingBottom = UDim.new(0, 5)
     
     ContainerLayout.Name = "ContainerLayout"
     ContainerLayout.Parent = Container
@@ -905,6 +1077,7 @@ if game.CoreGui:FindFirstChild("woof") then
           function()
              for i, v in next, ContainerHold:GetChildren() do
                 if v.ClassName == "ScrollingFrame" then
+                   fuckit = v
                    v.Visible = false
                 end
              end
@@ -929,7 +1102,7 @@ if game.CoreGui:FindFirstChild("woof") then
  function UpdateResoults()
      local search = string.lower(MainFrameSearchBox.Text)
      for i,v in pairs(Container:GetChildren()) do
-         if v.ClassName ~= "UIListLayout" and v.ClassName == "TextButton" then
+         if v.ClassName ~= "UIListLayout" and v.ClassName ~= "Frame" and v.ClassName ~= "UIPadding" then
              if search ~= "" then
                  local item = string.lower(v.Name)
                  if string.find(item, search) then
@@ -942,6 +1115,7 @@ if game.CoreGui:FindFirstChild("woof") then
              end
          end
      end
+ 
  end
  
  MainFrameSearchBox.Changed:Connect(UpdateResoults)
@@ -969,6 +1143,12 @@ if game.CoreGui:FindFirstChild("woof") then
     Textbox.Text = ""
     Textbox.TextColor3 = Color3.fromRGB(255, 255, 255)
     Textbox.TextSize = 14.000
+ 
+    local TextboxStroke = Instance.new("UIStroke")
+    TextboxStroke.Parent = Textbox
+    TextboxStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    TextboxStroke.Color = Color3.fromRGB(65, 65, 65)
+    TextboxStroke.Transparency = 0.6
     
     TextboxTitle.Name = "TextboxTitle"
     TextboxTitle.Parent = Textbox
@@ -1029,17 +1209,14 @@ if game.CoreGui:FindFirstChild("woof") then
     TextBox.FocusLost:Connect(
        function(ep)
           if ep then
-             if #TextBox.Text > 0 then
+             --if #TextBox.Text > 0 then
                 pcall(callback, TextBox.Text)
-                if disapper then
-                   TextBox.Text = ""
-                end
-             end
+             --end
           end
        end
     )
  
-    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
  end
  
  
@@ -1067,6 +1244,12 @@ if game.CoreGui:FindFirstChild("woof") then
     Slider.Text = ""
     Slider.TextColor3 = Color3.fromRGB(255, 255, 255)
     Slider.TextSize = 14.000
+ 
+    local SliderStroke = Instance.new("UIStroke")
+    SliderStroke.Parent = Slider
+    SliderStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    SliderStroke.Color = Color3.fromRGB(65, 65, 65)
+    SliderStroke.Transparency = 0.6
     
     SliderTitle.Name = "SliderTitle"
     SliderTitle.Parent = Slider
@@ -1099,7 +1282,7 @@ if game.CoreGui:FindFirstChild("woof") then
     SliderIndicatorCorner.Name = "SliderIndicatorCorner"
     SliderIndicatorCorner.Parent = SliderIndicator
     
-    SliderIndicatorGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 17, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 162, 255))}
+    SliderIndicatorGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(13, 45, 226)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 153, 255))}
     SliderIndicatorGradient.Name = "SliderIndicatorGradient"
     SliderIndicatorGradient.Parent = SliderIndicator
     
@@ -1158,7 +1341,7 @@ if game.CoreGui:FindFirstChild("woof") then
        end
     )
  
-    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
  end
  
  
@@ -1180,7 +1363,7 @@ if game.CoreGui:FindFirstChild("woof") then
     lineCorner.Name = "lineCorner"
     lineCorner.Parent = line
  
-    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
  end
  
  
@@ -1205,6 +1388,12 @@ if game.CoreGui:FindFirstChild("woof") then
     KeyBind.Text = ""
     KeyBind.TextColor3 = Color3.fromRGB(255, 255, 255)
     KeyBind.TextSize = 14.000
+ 
+    local KeyBindStroke = Instance.new("UIStroke")
+    KeyBindStroke.Parent = KeyBind
+    KeyBindStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    KeyBindStroke.Color = Color3.fromRGB(65, 65, 65)
+    KeyBindStroke.Transparency = 0.6
     
     Titl.Name = "Titl"
     Titl.Parent = KeyBind
@@ -1241,7 +1430,7 @@ if game.CoreGui:FindFirstChild("woof") then
     KeybindCorner.Name = "KeybindCorner"
     KeybindCorner.Parent = KeyBind
  
-    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
  
     local UIS = game:GetService('UserInputService')
    
@@ -1321,6 +1510,12 @@ if game.CoreGui:FindFirstChild("woof") then
     Label.Text = text
     Label.TextColor3 = Color3.fromRGB(255, 255, 255)
     Label.TextSize = 17.000
+ 
+    local LabelStroke = Instance.new("UIStroke")
+    LabelStroke.Parent = Label
+    LabelStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    LabelStroke.Color = Color3.fromRGB(65, 65, 65)
+    LabelStroke.Transparency = 0.6
     
     LabelCorner.CornerRadius = UDim.new(0, 5)
     LabelCorner.Name = "LabelCorner"
@@ -1329,7 +1524,7 @@ if game.CoreGui:FindFirstChild("woof") then
     function Labelfunc:Refresh(hewo)
        Label.Text = hewo
     end
-    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
     return Labelfunc
  end
  
@@ -1358,13 +1553,18 @@ if game.CoreGui:FindFirstChild("woof") then
     Dropdown.Parent = Container
     Dropdown.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
     Dropdown.Position = UDim2.new(-0.747557044, 0, 0.729113936, 0)
-    Dropdown.Size = UDim2.new(0, 405, 0, 45)
+    Dropdown.Size = UDim2.new(0, 405, 0, 40)
     Dropdown.AutoButtonColor = false
     Dropdown.Font = Enum.Font.Gotham
     Dropdown.Text = ""
     Dropdown.TextColor3 = Color3.fromRGB(255, 255, 255)
     Dropdown.TextSize = 15.000
     
+    local DropdownStroke = Instance.new("UIStroke")
+    DropdownStroke.Parent = Dropdown
+    DropdownStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    DropdownStroke.Color = Color3.fromRGB(65, 65, 65)
+    DropdownStroke.Transparency = 0.6
  
     Title.Name = "Title"
     Title.Parent = Dropdown
@@ -1460,26 +1660,26 @@ if game.CoreGui:FindFirstChild("woof") then
  local Items = DropdownHolder
  
  function UpdateResoults()
-     local search = string.lower(Searchbar.Text)
-     for i,v in pairs(Items:GetChildren()) do
-         if v.ClassName == "TextButton" then
+       local search = string.lower(Searchbar.Text)
+       for i,v in pairs(Items:GetChildren()) do
+          if v.ClassName == "TextButton" then
              if search ~= "" then
-                 local item = string.lower(v.Text)
-                 if string.find(item, search) then
-                     
-                 else
-                     v.Visible = false
-                 end
+                local item = string.lower(v.Text)
+                if string.find(item, search) then
+                   
+                else
+                   v.Visible = false
+                end
              else
-                 v.Visible = true
+                v.Visible = true
              end
-         end
-     end
- end
+          end
+       end
+    end
  
  DropdownSearch.Changed:Connect(UpdateResoults)
  
-    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
    
     Dropdown.MouseEnter:Connect(
        function()
@@ -1526,7 +1726,7 @@ if game.CoreGui:FindFirstChild("woof") then
              repeat
                 wait()
              until DropdownFrame.Size == UDim2.new(0, 403, 0, FrameSize)
-             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
           else
              DropdownFrame:TweenSize(
                 UDim2.new(0, 403, 0, 0),
@@ -1551,7 +1751,7 @@ if game.CoreGui:FindFirstChild("woof") then
                 wait()
              until DropdownFrame.Size == UDim2.new(0, 403, 0, 0)
              DropdownFrame.Visible = false
-             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
           end
           DropToggled = not DropToggled
        end
@@ -1626,7 +1826,7 @@ if game.CoreGui:FindFirstChild("woof") then
                 wait()
              until DropdownFrame.Size == UDim2.new(0, 403, 0, 0)
              DropdownFrame.Visible = false
-             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
           end
        )
  
@@ -1667,7 +1867,7 @@ if game.CoreGui:FindFirstChild("woof") then
           wait()
        until DropdownFrame.Size == UDim2.new(0, 403, 0, 0)
        DropdownFrame.Visible = false
-       Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+       Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
     end
  
     function dropfunc:Add(toadd)
@@ -1739,7 +1939,7 @@ if game.CoreGui:FindFirstChild("woof") then
                 wait()
              until DropdownFrame.Size == UDim2.new(0, 403, 0, 0)
              DropdownFrame.Visible = false
-             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
           end
        )
  
@@ -1764,6 +1964,12 @@ if game.CoreGui:FindFirstChild("woof") then
     Button.Text = text
     Button.TextColor3 = Color3.fromRGB(255, 255, 255)
     Button.TextSize = 15.000
+ 
+    local ButtonStroke = Instance.new("UIStroke")
+    ButtonStroke.Parent = Button
+    ButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    ButtonStroke.Color = Color3.fromRGB(65, 65, 65)
+    ButtonStroke.Transparency = 0.6
     
     ButtonCorner.CornerRadius = UDim.new(0, 5)
     ButtonCorner.Name = "ButtonCorner"
@@ -1799,7 +2005,7 @@ if game.CoreGui:FindFirstChild("woof") then
        ):Play()
        pcall(callback)
     end)
-    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
  end
  
  function ContainerItems:Toggle(title, Default, callback)
@@ -1816,7 +2022,7 @@ if game.CoreGui:FindFirstChild("woof") then
     local ToggleDotGradient = Instance.new("UIGradient")
     local ToggleDotCorner = Instance.new("UICorner")
  
-    Toggle.Name = title
+    Toggle.Name = "Toggle"
     Toggle.Parent = Container
     Toggle.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
     Toggle.Position = UDim2.new(-0.747557044, 0, 0.729113936, 0)
@@ -1826,6 +2032,12 @@ if game.CoreGui:FindFirstChild("woof") then
     Toggle.Text = ""
     Toggle.TextColor3 = Color3.fromRGB(255, 255, 255)
     Toggle.TextSize = 14.000
+ 
+    local TextboxStroke = Instance.new("UIStroke")
+    TextboxStroke.Parent = Toggle
+    TextboxStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    TextboxStroke.Color = Color3.fromRGB(65, 65, 65)
+    TextboxStroke.Transparency = 0.6
     
     ToggleCorner.CornerRadius = UDim.new(0, 5)
     ToggleCorner.Name = "ToggleCorner"
@@ -1867,17 +2079,27 @@ if game.CoreGui:FindFirstChild("woof") then
     ToggleDot.Parent = ToggleFrameRainbow
     ToggleDot.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     ToggleDot.Position = UDim2.new(-0.129998758, -3, 0.243545532, -4)
-    --0.129998758, -3, 0.243545532, -4 ^^
     ToggleDot.Size = UDim2.new(0, 22, 0, 20)
-    
  
-    ToggleDotGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 17, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 162, 255))}
+ 
+    
+    ToggleDotGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(13, 45, 226)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 153, 255))}
+    ToggleDotGradient.Name = "ToggleDotGradient"
+    ToggleDotGradient.Parent = ToggleDot
+    
+    ToggleDotCorner.CornerRadius = UDim.new(1, 0)
+    ToggleDotCorner.Name = "ToggleDotCorner"
+    ToggleDotCorner.Parent = ToggleDot   
+ 
+    ToggleDotGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(13, 45, 226)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 153, 255))}
     ToggleDotGradient.Name = "ToggleDotGradient"
     ToggleDotGradient.Parent = ToggleDot
     
     ToggleDotCorner.CornerRadius = UDim.new(1, 0)
     ToggleDotCorner.Name = "ToggleDotCorner"
     ToggleDotCorner.Parent = ToggleDot
+ 
+    
  
     Toggle.MouseEnter:Connect(function()
        TweenService:Create(
@@ -1899,7 +2121,8 @@ if game.CoreGui:FindFirstChild("woof") then
        ToggleDot.Position = UDim2.new(-0.05, -3, 0.243545532, -4)
     else
        ToggleDot.Position = UDim2.new(0.595001221, -3, 0.243545532, -4)
-       pcall(callback, Toggled)
+       
+          pcall(callback, Toggled)
     end
  
     Toggle.MouseButton1Click:Connect(function()
@@ -1917,9 +2140,10 @@ if game.CoreGui:FindFirstChild("woof") then
           ):Play()
        end
        Toggled = not Toggled
-       pcall(callback, Toggled)
+       
+          pcall(callback, Toggled)
     end)
-    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
  end
  
  
@@ -1952,12 +2176,18 @@ if game.CoreGui:FindFirstChild("woof") then
     Checklist.Parent = Container
     Checklist.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
     Checklist.Position = UDim2.new(-0.747557044, 0, 0.729113936, 0)
-    Checklist.Size = UDim2.new(0, 405, 0, 45)
+    Checklist.Size = UDim2.new(0, 405, 0, 40)
     Checklist.AutoButtonColor = false
     Checklist.Font = Enum.Font.Gotham
     Checklist.Text = ""
     Checklist.TextColor3 = Color3.fromRGB(255, 255, 255)
     Checklist.TextSize = 15.000
+ 
+    local ChecklistStroke = Instance.new("UIStroke")
+    ChecklistStroke.Parent = Checklist
+    ChecklistStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    ChecklistStroke.Color = Color3.fromRGB(65, 65, 65)
+    ChecklistStroke.Transparency = 0.6
  
     ChecklistTitle.Name = "ChecklistTitle"
     ChecklistTitle.Parent = Checklist
@@ -2036,7 +2266,7 @@ if game.CoreGui:FindFirstChild("woof") then
  
  local Items = ChecklistHolder
  
- function UpdateResoults()
+ local function UpdateResoults()
      local search = string.lower(Searchbar.Text)
      for i,v in pairs(Items:GetChildren()) do
          if v.ClassName == "TextButton" then
@@ -2056,7 +2286,15 @@ if game.CoreGui:FindFirstChild("woof") then
  
  ChecklistSearch.Changed:Connect(UpdateResoults)
  
-    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
+ --------------------------------------------------------------------------------------------------
+ --[[
+    ChecklistSearch.Changed:Connect(function()
+ 
+    ChecklistHolder.Size = UDim2.new(0, 336, 0, ChecklistItemLayout.AbsoluteContentSize.Y + 10)
+ 
+    ChecklistFrame.Size = UDim2.new(0, 346, 0, ChecklistItemLayout.AbsoluteContentSize.Y + 10)
+    end)]]
    
     Checklist.MouseEnter:Connect(
        function()
@@ -2103,7 +2341,7 @@ if game.CoreGui:FindFirstChild("woof") then
              repeat
                 wait()
              until ChecklistFrame.Size == UDim2.new(0, 346, 0, FrameSize)
-             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
           else
              ChecklistFrame:TweenSize(
                 UDim2.new(0, 346, 0, 0),
@@ -2128,7 +2366,7 @@ if game.CoreGui:FindFirstChild("woof") then
                 wait()
              until ChecklistFrame.Size == UDim2.new(0, 346, 0, 0)
              ChecklistFrame.Visible = false
-             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
           end
           DropToggled = not DropToggled
        end
@@ -2142,7 +2380,7 @@ if game.CoreGui:FindFirstChild("woof") then
     for i, v in next, list do
        --ItemCount = ItemCount + 1
  
-          FrameSize = 300
+       FrameSize = 300
  
        local ChecklistItem = Instance.new("TextButton")
        local ChecklistItemCorner = Instance.new("UICorner")
@@ -2168,7 +2406,7 @@ if game.CoreGui:FindFirstChild("woof") then
        ChecklistItemCheck.Position = UDim2.new(0.898372591, 0, 0.0833333358, 0)
        ChecklistItemCheck.Size = UDim2.new(0, 28, 0, 20)
        ChecklistItemCheck.Image = "rbxassetid://6031068420"
-       ChecklistItemCheck.ImageColor3 = Color3.fromRGB(16, 192, 255)
+       ChecklistItemCheck.ImageColor3 = Color3.fromRGB(13, 45, 226)
  
        ChecklistItem.MouseEnter:Connect(
           function()
@@ -2195,11 +2433,11 @@ if game.CoreGui:FindFirstChild("woof") then
        ChecklistItem.MouseButton1Click:Connect(function()
        if table.find(checklists[glob].Value, v) then
          table.remove(checklists[glob].Value, table.find(checklists[glob].Value, v))
-         ChecklistTitle.Text = text .. " - " .. table.concat(checklists[glob].Value, ", ")
+         --ChecklistTitle.Text = text .. " - " .. table.concat(checklists[glob].Value, ", ")
          callback(checklists[glob].Value)
       else
          table.insert(checklists[glob].Value, v)
-         ChecklistTitle.Text = text .. " - " .. table.concat(checklists[glob].Value, ", ")
+         --ChecklistTitle.Text = text .. " - " .. table.concat(checklists[glob].Value, ", ")
          callback(checklists[glob].Value)
       end
     end)
@@ -2245,7 +2483,7 @@ if game.CoreGui:FindFirstChild("woof") then
  
              --callback(checklists.Value)
           end
-             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
           end)
     end
  
@@ -2283,7 +2521,7 @@ if game.CoreGui:FindFirstChild("woof") then
           wait()
        until ChecklistFrame.Size == UDim2.new(0, 403, 0, 0)
        ChecklistFrame.Visible = false
-       Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+       Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
     end
  
     function dropfunc:Add(toadd)
@@ -2315,7 +2553,7 @@ if game.CoreGui:FindFirstChild("woof") then
        ChecklistItemCheck.Position = UDim2.new(0.898372591, 0, 0.0833333358, 0)
        ChecklistItemCheck.Size = UDim2.new(0, 28, 0, 20)
        ChecklistItemCheck.Image = "rbxassetid://6031068420"
-       ChecklistItemCheck.ImageColor3 = Color3.fromRGB(16, 192, 255)
+       ChecklistItemCheck.ImageColor3 = Color3.fromRGB(13, 45, 226)
  
        ChecklistItem.MouseEnter:Connect(
           function()
@@ -2382,7 +2620,7 @@ if game.CoreGui:FindFirstChild("woof") then
              --pcall(callback, "notohojkfhdjklfhdsjhvjchgvjdfdjhbsjhfdbjhd")
              onlol = false
           end
-             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
           end
        )
  
@@ -2424,6 +2662,12 @@ if game.CoreGui:FindFirstChild("woof") then
     Colorpicker.Text = ""
     Colorpicker.TextColor3 = Color3.fromRGB(255, 255, 255)
     Colorpicker.TextSize = 14.000
+ 
+    local ColorpickerStroke = Instance.new("UIStroke")
+    ColorpickerStroke.Parent = Colorpicker
+    ColorpickerStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    ColorpickerStroke.Color = Color3.fromRGB(65, 65, 65)
+    ColorpickerStroke.Transparency = 0.6
  
     Title.Name = "Title"
     Title.Parent = Colorpicker
@@ -2612,11 +2856,11 @@ if game.CoreGui:FindFirstChild("woof") then
     RainbowToggleDotCorner.Name = "RainbowToggleDotCorner"
     RainbowToggleDotCorner.Parent = RainbowToggleDot
  
-    RainbowToggleDotGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 17, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 162, 255))}
+    RainbowToggleDotGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(13, 45, 226)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 153, 255))}
     RainbowToggleDotGradient.Name = "RainbowToggleDotGradient"
     RainbowToggleDotGradient.Parent = RainbowToggleDot
  
-    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
  
     Colorpicker.MouseEnter:Connect(
        function()
@@ -2817,7 +3061,7 @@ if game.CoreGui:FindFirstChild("woof") then
              repeat
                 wait()
              until ColorpickerFrame.Size == UDim2.new(0, 403, 0, 100)
-             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
           else
              ColorPickerToggled = not ColorPickerToggled
              ColorpickerFrame:TweenSize(
@@ -2831,7 +3075,7 @@ if game.CoreGui:FindFirstChild("woof") then
                 wait()
              until ColorpickerFrame.Size == UDim2.new(0, 403, 0, 0)
              ColorpickerFrame.Visible = false
-             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+             Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
           end
        end
     )
@@ -2857,7 +3101,7 @@ if game.CoreGui:FindFirstChild("woof") then
              wait()
           until ColorpickerFrame.Size == UDim2.new(0, 403, 0, 0)
           ColorpickerFrame.Visible = false
-          Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+          Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
        end)
  
     coroutine.wrap(
@@ -2875,4 +3119,4 @@ if game.CoreGui:FindFirstChild("woof") then
  end
  return Tabs
  end
- return Mainholder
+   return Mainholder
